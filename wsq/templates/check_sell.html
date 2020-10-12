@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block otherstyle %}
+    <style>
+    .form-signin {
+        margin: 0 auto;
+        max-width: 330px;
+        padding: 15px;
+    }
+
+
+
+    .form-signin .form-control {
+        box-sizing: border-box;
+        font-size: 16px;
+        height: auto;
+        padding: 10px;
+        position: relative;
+    }
+
+
+    .form-signin input[type="text"] {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        margin-bottom: 10px;
+    }</style>{% endblock %}
+{% block content %}
+    <form role="form" class="form-signin" method="post">
+{#        <input type="text" data-provide="datepicker" name="date" readonly class="form-control datepicker" value="点击选择日期"/>#}
+        <input type="text" placeholder="请输入查询药名..." name="yd_name" value="" class="form-control" />
+        <button type="submit" class="btn btn-lg btn-primary btn-block">查询</button>
+    </form>
+{% endblock %}

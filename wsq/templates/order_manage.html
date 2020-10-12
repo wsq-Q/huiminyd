@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block somescript %}
+    <div class="modal" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" id="modalContent">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal1" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modalContent">
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('abbr.order-info').click(function () {
+                var order_id = $(this).attr("order_id");
+                $('#myModal').modal({
+                    remote: "/wsq/api/order_info/?order_id=" + order_id,
+                    backdrop: "static"
+                })
+            });
+
+
+            $('body').on('hidden.bs.modal', '.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>订单号</th>
+                <th>顾客</th>
+                <th>日期</th>
+                <th>操作人</th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td><abbr class="order-info" title="{{ order.remark }}"
+                              order_id="{{ order.id }}" onclick="null">{{ order.name }}</abbr></td>
+                    <td>{{ order.customer }}</td>
+                    <td>{{ order.date|date:"Y.n.j" }}</td>
+                    <td>{{ order.updater }}</td>
+
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

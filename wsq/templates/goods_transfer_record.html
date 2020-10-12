@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block content %}
+    <div class="col-md-12">
+        <div class="panel-group" id="accordion">
+            {% for every_day_transfer_record in every_day_transfer_record %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter0 }}">
+                                {{ every_day_transfer_record.date|date:"Y年n月j日" }}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse{{ forloop.counter0 }}"
+                         class="panel-collapse collapse {% if forloop.counter0 == 0 %}in{% endif %}">
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>药品名</th>
+                                    <th>数量</th>
+                                    <th>调入方</th>
+                                    <th>操作时间</th>
+                                    <th>操作人</th>
+                                </tr>
+                                {% for transfer_records in every_day_transfer_record.records %}
+                                    <tr>
+                                        <td>{{ transfer_records.goods.goods_name }}</td>
+                                        <td>
+                                            {{ transfer_records.count }}
+                                        </td>
+                                        <td>{{ transfer_records.transfer_shop.name }}</td>
+                                        <td>{{ transfer_records.date|date:"H:i" }}</td>
+                                        <td>{{ transfer_records.updater }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

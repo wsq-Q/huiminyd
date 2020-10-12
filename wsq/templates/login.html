@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}登录惠民药店管理系统{% endblock %}
+{% block otherstyle %}
+    <style>
+        html {height: 100%}
+        body {
+            background-image: url("static/image/back_image.jpg");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        .form-signin {
+            margin: 0 auto;
+            max-width: 330px;
+            padding: 15px;
+        }
+
+        .form-signin .form-signin-heading, .form-signin .checkbox {
+            margin-bottom: 10px;
+        }
+
+        .form-signin .checkbox {
+            font-weight: normal;
+        }
+
+        .form-signin .form-control {
+            box-sizing: border-box;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            position: relative;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            margin-bottom: -1px;
+        }
+
+        .form-signin input[type="password"] {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            margin-bottom: 10px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block top %}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">欢迎登录惠民药店管理系统</h3>
+        </div>
+        <div class="panel-body">
+            <form role="form" class="form-signin" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" autofocus="" required="" name="username" placeholder="帐号" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="password" required="" name="password" placeholder="密码" class="form-control">
+                </div>
+                <div class="checkbox">
+                    <label for="remember-me">
+                            <input id="remember-me" name="remember_me" type="checkbox" value="y">
+                            记住我
+                    </label>
+                </div>
+                <input class="btn btn-lg btn-success btn-block" id="submit" name="submit" type="submit" value="登录">
+            </form>
+            <div class="row" style="margin-top: 10px">
+{#                <div class="col-md-5"><a href="/account/forgot">忘记密码？</a></div>#}
+                <div class="col-md-11"><a class="pull-right" href="/wsq/connect">没有帐号，请联系超级管理员</a></div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+

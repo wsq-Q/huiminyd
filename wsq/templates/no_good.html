@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+    <h1>您的药店暂无此药！<a href="{% url "one_good" %}">点击继续搜索</a></h1>
+    <h3>您也可以添加此药，<a href="{% url "addgoods" %}">点击添加</a></h3>
+{% endblock %}

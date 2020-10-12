@@ -1,0 +1,6 @@
+﻿pymysql==0.9.3
+django==1.8.5
+#python: 3.6
+#database_name(MySQL): huiminyd
+#JetBrains PyCharm 2019.3 x64
+#Microsoft Edge,Google Chrome

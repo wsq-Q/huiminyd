@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block somescript %}
+    <div class="modal" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" id="modalContent">
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('abbr.sell-info').click(function () {
+                var sell_record_id = $(this).attr("sell_record_id");
+                $('#myModal').modal({
+                    remote: "/wsq/api/sell_info/?sell_record_id=" + sell_record_id,
+                    backdrop: "static"
+                })
+            });
+            $('body').on('hidden.bs.modal', '.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-12">
+        <table class="table table-condensed">
+           <tr>
+               <th class="danger">共花费: {{ all_cost }}元</th>
+               <th class="info">毛利润:{{ mao_profit }}元</th>
+               <th class="success">净利润: {{ all_profit }}元</th>
+            </tr>
+        </table>
+        <table class="table table-striped">
+            <tr>
+                <th>药品</th>
+                <th>卖价</th>
+                <th>数量</th>
+                {% if request.user.is_superuser %}
+                    <th>利润</th>
+                {% else %}
+                    <th>总计</th>
+                {% endif %}
+                <th>日期</th>
+            </tr>
+            {% for sell_record in sell_records %}
+                <tr>
+                    <td><abbr class="sell-info" title="{{ sell_record.remark }}"
+                              sell_record_id="{{ sell_record.id }}">{{ sell_record.goods }}</abbr></td>
+                    <td>{{ sell_record.sell_price }}</td>
+                    <td>{{ sell_record.sell_num }}</td>
+                    {% if request.user.is_superuser %}
+                        <td>{{ sell_record.get_profit }}</td>
+                    {% else %}
+                        <td>{{ sell_record.get_receivable }}</td>
+                    {% endif %}
+                    <td>{{ sell_record.date|date:"Y.n.j" }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+{% endblock %}

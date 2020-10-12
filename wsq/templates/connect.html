@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}申请管理员账号{% endblock %}
+{% block otherstyle %}
+    <style>
+        html {height: 100%}
+        body {
+            background-image: url("static/image/back_image.jpg");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+    </style>
+{% endblock %}
+{% block top %}{% endblock %}
+{% block content %}
+<body>
+    <h1 style="text-align:center">
+        <ul>
+            <li style="list-style-type:none"><img src="static/image/wsq.jpg" alt="图片加载失败"/></li>
+            <li style="list-style-type:none; color: #F00">添加好友获取登录账号密码</li>
+            <li style="list-style-type:none; margin-top: 50px;" ><a href="{% url "mylogin" %}">点击继续登录</a></li>
+        </ul>
+    </h1>
+
+{% endblock %}
